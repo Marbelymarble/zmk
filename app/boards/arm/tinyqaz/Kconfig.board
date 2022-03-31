@@ -1,0 +1,8 @@
+# Tinyqaz board configuration
+
+# Copyright (c) 2016 Open-RnD Sp. z o.o.
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_TINYQAZ
+	bool "Tinyqaz Keyboard"
+	depends on SOC_STM32F103XB

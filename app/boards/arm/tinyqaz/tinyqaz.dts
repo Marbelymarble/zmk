@@ -1,0 +1,66 @@
+/*
+ * Copyright (c) 2017 I-SENSE group of ICCS
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/dts-v1/;
+#include <st/f1/stm32f103Xb.dtsi>
+
+/ {
+	model = "Marvworks, Tinyqaz";
+	compatible = "marvworks,tinyqaz", "st,stm32f103rb";
+
+	chosen {
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zmk,kscan = &kscan0;
+	};
+
+	kscan0: kscan {
+		compatible = "zmk,kscan-gpio-direct";
+		
+		label = "KSCAN";
+		
+		input-gpios
+			= <&gpiob 4  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 5  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 6  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 3  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 1  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 7  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 9  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+			, <&gpiob 8  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 0  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 2  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpioa 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+			, <&gpiob 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&gpiob 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+			, <&gpioa 8  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            ;
+	};
+
+};
+
+&usb {
+	status = "okay";
+};
+
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		/* Set 2KB of storage at the end of 128KB flash */
+		storage_partition: partition@1f800 {
+			label = "storage";
+			reg = <0x0001f800 0x00000800>;
+		};
+	};
+};
